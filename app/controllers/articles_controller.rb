@@ -6,4 +6,18 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
   end
+
+  def new
+    @article = Article.new
+  end
+
+  def create
+    @article = Article.new(title: "My First Blog", body: "My First Blog Text")
+
+    if @article.save
+      redirect_to @article
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
 end
